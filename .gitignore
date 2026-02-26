@@ -1,0 +1,77 @@
+# ==============================
+# PYTHON
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Pytest
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+
+# Ruff / Lint
+.ruff_cache/
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+
+# Logs
+*.log
+
+# ==============================
+# POETRY
+# ==============================
+# (poetry.lock DEVE ser versionado em aplicações)
+# poetry.lock
+
+# ==============================
+# ENV FILES
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# DOCKER
+# ==============================
+docker-compose.override.yml
+
+# ==============================
+# DATABASE
+# ==============================
+*.db
+*.sqlite3
+
+# ==============================
+# ALEMBIC
+# ==============================
+alembic/versions/__pycache__/
+
+# ==============================
+# IDE
+# ==============================
+.vscode/
+.idea/
+
+# ==============================
+# OS FILES
+# ==============================
+.DS_Store
+Thumbs.dbdatabase.db
