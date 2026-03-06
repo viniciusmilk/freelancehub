@@ -1,0 +1,163 @@
+# =========================
+# Git
+# =========================
+.git
+.gitignore
+.gitattributes
+
+# =========================
+# Python cache
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc.*
+*.py,cover
+
+# =========================
+# Python virtual environments
+# =========================
+.env/
+.venv/
+venv/
+ENV/
+env/
+
+# =========================
+# Poetry / Pip
+# =========================
+.poetry/
+pip-wheel-metadata/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+*.env
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+*.out
+*.err
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# =========================
+# Testing / Coverage
+# =========================
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# =========================
+# MyPy / Type checking
+# =========================
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# =========================
+# Ruff / Lint
+# =========================
+.ruff_cache/
+
+# =========================
+# Pyright
+# =========================
+.pyright/
+
+# =========================
+# Build artifacts
+# =========================
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# Node (caso tenha frontend)
+# =========================
+node_modules/
+
+# =========================
+# Docker files (dependendo do setup)
+# =========================
+docker-compose.override.yml
+
+# =========================
+# Local database files
+# =========================
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+*.tmp
+
+# =========================
+# Notebooks
+# =========================
+*.ipynb
+
+# =========================
+# Media uploads (caso exista)
+# =========================
+uploads/
+media/
+
+# =========================
+# Backup files
+# =========================
+*.bak
+*.backup
+*.old
+
+# =========================
+# Documentation build
+# =========================
+docs/_build/
+
+# =========================
+# Cache
+# =========================
+.cache/
+
+# =========================
+# Secrets
+# =========================
+secrets/
+*.key
+*.pem
+*.crt
+
+# =========================
+# Docker volumes
+# =========================
+volumes/

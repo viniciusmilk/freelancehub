@@ -5,21 +5,20 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from app.core.config import settings
 
-from app.infrastructure.database.base import Base
-
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
 database_url = settings.database_url
 
-# Postgres
+# postgres
 if database_url.startswith('postgresql+asyncpg'):
     database_url = database_url.replace('+asyncpg', '')
 
-# SQLite
+# sqlite
 if database_url.startswith('sqlite+aiosqlite'):
     database_url = database_url.replace('+aiosqlite', '')
-    
+
 config.set_main_option('sqlalchemy.url', database_url)
 
 # Interpret the config file for Python logging.
@@ -31,6 +30,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
+from app.infrastructure.database.base import Base  # noqa: E402
 
 target_metadata = Base.metadata
 
