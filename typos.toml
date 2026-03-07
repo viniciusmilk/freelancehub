@@ -1,0 +1,15 @@
+[files]
+extend-exclude = [
+    "*.sh",
+    "*.yml",
+    "*.yaml",
+    "*.dockerfile",
+    "Dockerfile*",
+]
+
+[default]
+extend-ignore-re = [
+    "#.*",
+    "//.*",
+    "/\\*.*\\*/",
+]

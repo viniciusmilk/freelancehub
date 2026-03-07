@@ -1,8 +1,7 @@
-# docker/docker-compose.yml
 
 services:
   database:
-    image: postgres:15         # fixe uma versão
+    image: postgres:15
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
