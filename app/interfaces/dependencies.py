@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.application.use_cases import (
     CreateUserUseCase,
     GetUsersUseCase,
+    GetUserUseCase,
 )
 from app.core.config import Settings
 from app.infrastructure.database.repositories.user_repository import (
@@ -36,6 +37,12 @@ def get_get_users_use_case(
     user_repository: UserRepository = Depends(get_user_repository),
 ) -> GetUsersUseCase:
     return GetUsersUseCase(user_repository)
+
+
+def get_get_user_use_case(
+    user_repository: UserRepository = Depends(get_user_repository),
+) -> GetUserUseCase:
+    return GetUserUseCase(user_repository)
 
 
 @lru_cache()

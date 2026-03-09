@@ -2,9 +2,14 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 
-from app.application.use_cases import CreateUserUseCase, GetUsersUseCase
+from app.application.use_cases import (
+    CreateUserUseCase,
+    GetUsersUseCase,
+    GetUserUseCase,
+)
 from app.interfaces.dependencies import (
     get_create_user_use_case,
+    get_get_user_use_case,
     get_get_users_use_case,
 )
 from app.interfaces.schemas import (
@@ -36,3 +41,16 @@ def get_users(
 ):
     users = get_users_use_case.execute()
     return {'users': users}
+
+
+@router.get(
+    '/{user_id}',
+    response_model=UserResponseSchema,
+    status_code=HTTPStatus.OK,
+)
+def get_user(
+    user_id: str,
+    get_user_use_case: GetUserUseCase = Depends(get_get_user_use_case),
+):
+    user = get_user_use_case.execute(user_id)
+    return user
