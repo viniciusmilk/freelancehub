@@ -35,7 +35,7 @@ extend-exclude = ['alembic']
 [tool.ruff.lint]
 preview = true
 select = ['I', 'F', 'E', 'W', 'PL', 'PT']
-# Opcional: Descomente a linha abaixo se quiser ignorar o erro de "Magic Numbers" (200) nos testes
+# "Magic Numbers" (200) nos testes
 # ignore = ["PLR2004"]
 
 [tool.ruff.format]

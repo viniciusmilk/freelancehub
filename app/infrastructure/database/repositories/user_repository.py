@@ -50,6 +50,7 @@ class UserRepository:
             created_at=model.created_at,
         )
 
+    def get_all(self):
         stmt = select(UserModel)
         result = self.session.execute(stmt)
         models = result.scalars().all()

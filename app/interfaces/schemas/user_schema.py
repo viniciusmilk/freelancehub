@@ -17,3 +17,9 @@ class UserResponseSchema(BaseModel):
     role: str
 
     model_config = {'from_attributes': True}
+
+
+class UserListResponseSchema(BaseModel):
+    users: list[UserResponseSchema]
+
+    model_config = {'from_attributes': True}

@@ -15,12 +15,12 @@ class CreateUserUseCase:
         print(f'PASSWORD HASH: {password_hash}')
 
         user = User(
-            id=None,  # Será gerado pelo banco
+            id=None,
             username=user_data.username,
             email=user_data.email,
             password_hash=password_hash,
             role=user_data.role,
             oauth_provider=None,
-            created_at=None,  # Será definido pelo banco
+            created_at=None,
         )
         return self.user_repository.create(user)

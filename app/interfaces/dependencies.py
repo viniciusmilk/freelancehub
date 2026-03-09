@@ -3,7 +3,10 @@ from functools import lru_cache
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from app.application.use_cases.create_user import CreateUserUseCase
+from app.application.use_cases import (
+    CreateUserUseCase,
+    GetUsersUseCase,
+)
 from app.core.config import Settings
 from app.infrastructure.database.repositories.user_repository import (
     UserRepository,
@@ -27,6 +30,12 @@ def get_create_user_use_case(
     user_repository: UserRepository = Depends(get_user_repository),
 ) -> CreateUserUseCase:
     return CreateUserUseCase(user_repository)
+
+
+def get_get_users_use_case(
+    user_repository: UserRepository = Depends(get_user_repository),
+) -> GetUsersUseCase:
+    return GetUsersUseCase(user_repository)
 
 
 @lru_cache()

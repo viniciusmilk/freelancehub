@@ -1,6 +1,11 @@
-from .user_schema import UserCreateSchema, UserResponseSchema
+from .user_schema import (
+    UserCreateSchema,
+    UserListResponseSchema,
+    UserResponseSchema,
+)
 
 __all__ = [
     'UserCreateSchema',
     'UserResponseSchema',
+    'UserListResponseSchema',
 ]
