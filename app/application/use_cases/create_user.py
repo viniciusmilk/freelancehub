@@ -1,3 +1,6 @@
+from datetime import datetime
+from uuid import uuid4
+
 from app.application.services.auth_service import get_password_hash
 from app.domain.entities.users import User
 
@@ -15,12 +18,12 @@ class CreateUserUseCase:
         print(f'PASSWORD HASH: {password_hash}')
 
         user = User(
-            id=None,
+            id=uuid4(),  # Gera UUID
             username=user_data.username,
             email=user_data.email,
             password_hash=password_hash,
             role=user_data.role,
             oauth_provider=None,
-            created_at=None,
+            created_at=datetime.utcnow(),  # Gera datetime atual
         )
         return self.user_repository.create(user)

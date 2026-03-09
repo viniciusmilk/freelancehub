@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -11,6 +13,7 @@ class UserRepository:
 
     def create(self, user: User):
         user_model = UserModel(
+            id=str(user.id),  # Converte UUID para str
             username=user.username,
             email=user.email,
             password_hash=user.password_hash,
@@ -21,15 +24,16 @@ class UserRepository:
         self.session.commit()
         self.session.refresh(user_model)
 
-        # Converter para entidade User
+        # Converter str para UUID na entidade User
         return User(
-            id=user_model.id,
+            id=UUID(user_model.id),
             username=user_model.username,
             email=user_model.email,
             password_hash=user_model.password_hash,
             role=user_model.role,
             oauth_provider=user_model.oauth_provider,
             created_at=user_model.created_at,
+            updated_at=user_model.updated_at,
         )
 
     def get_by_email(self, email: str):
@@ -41,13 +45,14 @@ class UserRepository:
             return None
 
         return User(
-            id=model.id,
+            id=UUID(model.id),  # Converte str para UUID
             username=model.username,
             email=model.email,
             password_hash=model.password_hash,
             role=model.role,
             oauth_provider=model.oauth_provider,
             created_at=model.created_at,
+            updated_at=model.updated_at,
         )
 
     def get_all(self):
@@ -56,13 +61,14 @@ class UserRepository:
         models = result.scalars().all()
         return [
             User(
-                id=model.id,
+                id=UUID(model.id),  # Converte str para UUID
                 username=model.username,
                 email=model.email,
                 password_hash=model.password_hash,
                 role=model.role,
                 oauth_provider=model.oauth_provider,
                 created_at=model.created_at,
+                updated_at=model.updated_at,
             )
             for model in models
         ]

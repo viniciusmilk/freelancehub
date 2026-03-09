@@ -1,20 +1,27 @@
 from datetime import datetime
 from typing import Optional
-
-from pydantic import BaseModel, EmailStr
+from uuid import UUID
 
 from app.domain.enums import UserRole
 
+from .base_entity import BaseEntity
 
-class User(BaseModel):
-    id: Optional[int] = None
-    username: str
-    email: EmailStr
-    password_hash: str
-    role: UserRole
-    oauth_provider: Optional[str] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
 
-    class Config:
-        from_attributes = True
+class User(BaseEntity):
+    def __init__(
+        self,
+        id: UUID,
+        username: str,
+        email: str,
+        password_hash: str,
+        role: UserRole,
+        created_at: datetime,
+        updated_at: Optional[datetime] = None,
+        oauth_provider: Optional[str] = None,
+    ):
+        super().__init__(id, created_at, updated_at)
+        self.username = username
+        self.email = email
+        self.password_hash = password_hash
+        self.role = role
+        self.oauth_provider = oauth_provider
