@@ -1,21 +1,14 @@
-import uuid
-from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import DateTime, Enum, String, func
+from sqlalchemy import Enum, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.domain.enums import UserRole
-from app.infrastructure.database.base import Base
+from app.infrastructure.database.base_model import BaseModel
 
 
-class UserModel(Base):
+class UserModel(BaseModel):
     __tablename__ = 'users'
-    id: Mapped[str] = mapped_column(
-        String(36),
-        primary_key=True,
-        default=lambda: str(uuid.uuid4()),
-    )
     username: Mapped[str] = mapped_column(
         String,
         unique=True,
@@ -37,15 +30,4 @@ class UserModel(Base):
     oauth_provider: Mapped[Optional[str]] = mapped_column(
         String,
         nullable=True,
-    )
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        server_default=func.now(),
-        nullable=False,
-    )
-    updated_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        server_default=func.now(),
-        onupdate=func.now(),
-        nullable=False,
     )
