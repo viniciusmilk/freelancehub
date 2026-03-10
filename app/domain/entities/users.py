@@ -1,4 +1,4 @@
-#users
+# users
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
@@ -31,7 +31,7 @@ class User(BaseEntity):
         self.password_hash = password_hash
         self.role = role
         self.oauth_provider = oauth_provider
-        
+
         @property
         def full_name(self) -> str:
             return f"{self.first_name} {self.last_name}"

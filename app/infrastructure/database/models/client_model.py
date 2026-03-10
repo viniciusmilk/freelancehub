@@ -1,4 +1,3 @@
-from uuid import uuid4
 
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import (
@@ -21,14 +20,14 @@ class ClientModel(BaseModel):
         String,
         nullable=False,
     )
-    owner_id: Mapped[str] = mapped_column( 
+    owner_id: Mapped[str] = mapped_column(
         ForeignKey("users.id"),
         nullable=False,
         index=True,
     )
-    
+
     owner = relationship("UserModel", back_populates="clients")
-    
+
     projects = relationship(
         "ProjectModel",
         back_populates="client",

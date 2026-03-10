@@ -1,13 +1,13 @@
-from sqlalchemy import Float, ForeignKey, String
+from sqlalchemy import Enum, Float, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Enum
 
-from app.infrastructure.database.base_model import BaseModel
 from app.domain.enums import ProjectStatus
+from app.infrastructure.database.base_model import BaseModel
+
 
 class ProjectModel(BaseModel):
     __tablename__ = 'projects'
-    
+
     title: Mapped[str] = mapped_column(String, nullable=False)
     description: Mapped[str] = mapped_column(String, nullable=False)
     status: Mapped[ProjectStatus] = mapped_column(
@@ -24,8 +24,11 @@ class ProjectModel(BaseModel):
         nullable=False,
         index=True,
     )
-    
+
     client = relationship("ClientModel", back_populates="projects")
     freelancer = relationship("UserModel", back_populates="projects")
-    contracts = relationship("ContractModel", back_populates="project", cascade="all, delete-orphan")
-    
+    contracts = relationship(
+        "ContractModel",
+        back_populates="project",
+        cascade="all, delete-orphan"
+    )

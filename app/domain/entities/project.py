@@ -1,4 +1,4 @@
-#project
+# project
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
@@ -8,7 +8,7 @@ from app.domain.enums import ProjectStatus
 from .base_entity import BaseEntity
 
 
-class ProjectCreate(BaseEntity):
+class Project(BaseEntity):
     def __init__(
         self,
         id: UUID,

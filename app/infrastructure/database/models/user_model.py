@@ -10,6 +10,9 @@ from sqlalchemy.orm import (
 from app.domain.enums import UserRole
 from app.infrastructure.database.base_model import BaseModel
 
+# Import para forward reference
+from .client_model import ClientModel
+
 
 class UserModel(BaseModel):
     __tablename__ = 'users'
@@ -49,4 +52,9 @@ class UserModel(BaseModel):
         back_populates="owner",
         cascade="all, delete-orphan",
     )
-    
+
+    projects: Mapped[list["ProjectModel"]] = relationship(
+        "ProjectModel",
+        back_populates="freelancer",
+        cascade="all, delete-orphan",
+    )

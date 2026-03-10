@@ -1,12 +1,15 @@
-from sqlalchemy import String, Float, Enum, ForeignKey, DateTime
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
-from app.infrastructure.database.base_model import BaseModel
+
+from sqlalchemy import DateTime, Enum, Float, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from app.domain.enums import InvoiceStatus
+from app.infrastructure.database.base_model import BaseModel
+
 
 class InvoiceModel(BaseModel):
     __tablename__ = 'invoices'
-    
+
     amount: Mapped[float] = mapped_column(Float, nullable=False)
     status: Mapped[InvoiceStatus] = mapped_column(
         Enum(InvoiceStatus, name='invoice_status'), nullable=False,
@@ -19,5 +22,5 @@ class InvoiceModel(BaseModel):
         nullable=False,
         index=True,
     )
-    
+
     contract = relationship("ContractModel", back_populates="invoices")
