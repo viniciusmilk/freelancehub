@@ -8,6 +8,7 @@ from app.application.use_cases import (
     DeleteUserUseCase,
     GetUsersUseCase,
     GetUserUseCase,
+    UpdateUserUseCase,
 )
 from app.core.config import Settings
 from app.infrastructure.database.repositories.user_repository import (
@@ -50,6 +51,12 @@ def get_delete_user_use_case(
     user_repository: UserRepository = Depends(get_user_repository),
 ) -> DeleteUserUseCase:
     return DeleteUserUseCase(user_repository)
+
+
+def get_update_user_use_case(
+    user_repository: UserRepository = Depends(get_user_repository),
+) -> UpdateUserUseCase:
+    return UpdateUserUseCase(user_repository)
 
 
 @lru_cache()

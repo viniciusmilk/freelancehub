@@ -7,12 +7,14 @@ from app.application.use_cases import (
     DeleteUserUseCase,
     GetUsersUseCase,
     GetUserUseCase,
+    UpdateUserUseCase,
 )
 from app.interfaces.dependencies import (
     get_create_user_use_case,
     get_delete_user_use_case,
     get_get_user_use_case,
     get_get_users_use_case,
+    get_update_user_use_case,
 )
 from app.interfaces.schemas import (
     UserCreateSchema,
@@ -70,3 +72,19 @@ def delete_user(
 ):
     delete_user_use_case.execute(user_id)
     return {'message': 'User deleted'}
+
+
+@router.put(
+    '/{user_id}',
+    response_model=UserResponseSchema,
+    status_code=HTTPStatus.OK,
+)
+def update_user(
+    user_id: str,
+    user_data: UserCreateSchema,
+    update_user_use_case: UpdateUserUseCase = Depends(
+        get_update_user_use_case
+    ),
+):
+    user = update_user_use_case.execute(user_id, user_data)
+    return user

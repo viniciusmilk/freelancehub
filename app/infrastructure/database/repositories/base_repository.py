@@ -51,7 +51,7 @@ class BaseRepository(Generic[Entity, Model]):
 
         return [self.mapper.to_entity(model) for model in models]
 
-    def delete(self, id: str) -> Optional[Entity]:
+    def delete(self, id: str):
 
         stmt = select(self.model_class).where(self.model_class.id == id)
         result = self.session.execute(stmt)
