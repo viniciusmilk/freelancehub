@@ -51,13 +51,15 @@ class BaseRepository(Generic[Entity, Model]):
 
         return [self.mapper.to_entity(model) for model in models]
 
-    def delete(self, id: str):
+    def delete(self, id: str) -> Optional[Entity]:
 
         stmt = select(self.model_class).where(self.model_class.id == id)
         result = self.session.execute(stmt)
 
         model = result.scalars().one_or_none()
 
-        if model:
-            self.session.delete(model)
-            self.session.commit()
+        if not model:
+            raise ValueError(f'Entity with id {id} not found')
+
+        self.session.delete(model)
+        self.session.commit()

@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.application.use_cases import (
     CreateUserUseCase,
+    DeleteUserUseCase,
     GetUsersUseCase,
     GetUserUseCase,
 )
@@ -43,6 +44,12 @@ def get_get_user_use_case(
     user_repository: UserRepository = Depends(get_user_repository),
 ) -> GetUserUseCase:
     return GetUserUseCase(user_repository)
+
+
+def get_delete_user_use_case(
+    user_repository: UserRepository = Depends(get_user_repository),
+) -> DeleteUserUseCase:
+    return DeleteUserUseCase(user_repository)
 
 
 @lru_cache()

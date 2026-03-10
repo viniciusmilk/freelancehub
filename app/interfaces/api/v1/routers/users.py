@@ -4,11 +4,13 @@ from fastapi import APIRouter, Depends
 
 from app.application.use_cases import (
     CreateUserUseCase,
+    DeleteUserUseCase,
     GetUsersUseCase,
     GetUserUseCase,
 )
 from app.interfaces.dependencies import (
     get_create_user_use_case,
+    get_delete_user_use_case,
     get_get_user_use_case,
     get_get_users_use_case,
 )
@@ -54,3 +56,17 @@ def get_user(
 ):
     user = get_user_use_case.execute(user_id)
     return user
+
+
+@router.delete(
+    '/{user_id}',
+    status_code=HTTPStatus.NO_CONTENT,
+)
+def delete_user(
+    user_id: str,
+    delete_user_use_case: DeleteUserUseCase = Depends(
+        get_delete_user_use_case
+    ),
+):
+    delete_user_use_case.execute(user_id)
+    return {'message': 'User deleted'}
