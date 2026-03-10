@@ -18,12 +18,14 @@ class CreateUserUseCase:
         print(f'PASSWORD HASH: {password_hash}')
 
         user = User(
-            id=uuid4(),  # Gera UUID
+            id=uuid4(),
             username=user_data.username,
+            first_name=user_data.first_name,
+            last_name=user_data.last_name,
             email=user_data.email,
             password_hash=password_hash,
             role=user_data.role,
             oauth_provider=None,
-            created_at=datetime.utcnow(),  # Gera datetime atual
+            created_at=datetime.utcnow(),
         )
         return self.user_repository.create(user)

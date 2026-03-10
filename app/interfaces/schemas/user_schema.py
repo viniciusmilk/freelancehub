@@ -8,6 +8,8 @@ from app.domain.enums import UserRole
 
 class UserCreateSchema(BaseModel):
     username: str
+    first_name: str
+    last_name: str
     email: EmailStr
     password: str
     role: UserRole
@@ -18,6 +20,8 @@ class UserCreateSchema(BaseModel):
 class UserResponseSchema(BaseModel):
     id: UUID
     username: str
+    first_name: str
+    last_name: str
     email: EmailStr
     role: UserRole
     created_at: datetime
@@ -34,6 +38,8 @@ class UserListResponseSchema(BaseModel):
 
 class UserUpdateSchema(BaseModel):
     username: str | None = None
+    first_name: str | None = None
+    last_name: str | None = None
     email: EmailStr | None = None
     password: str | None = None
     role: UserRole | None = None
