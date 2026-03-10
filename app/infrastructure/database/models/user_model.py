@@ -1,7 +1,11 @@
 from typing import Optional
 
 from sqlalchemy import Enum, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import (
+    Mapped,
+    mapped_column,
+    relationship,
+)
 
 from app.domain.enums import UserRole
 from app.infrastructure.database.base_model import BaseModel
@@ -19,6 +23,14 @@ class UserModel(BaseModel):
         unique=True,
         nullable=False,
     )
+    first_name: Mapped[str] = mapped_column(
+        String,
+        nullable=False,
+    )
+    last_name: Mapped[str] = mapped_column(
+        String,
+        nullable=False,
+    )
     password_hash: Mapped[str] = mapped_column(
         String,
         nullable=False,
@@ -31,3 +43,10 @@ class UserModel(BaseModel):
         String,
         nullable=True,
     )
+
+    clients: Mapped[list["ClientModel"]] = relationship(
+        "ClientModel",
+        back_populates="owner",
+        cascade="all, delete-orphan",
+    )
+    
