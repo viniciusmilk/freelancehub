@@ -20,6 +20,7 @@ from app.interfaces.schemas import (
     UserCreateSchema,
     UserListResponseSchema,
     UserResponseSchema,
+    UserUpdateSchema,
 )
 
 router = APIRouter(prefix='/users', tags=['users'])
@@ -81,10 +82,28 @@ def delete_user(
 )
 def update_user(
     user_id: str,
-    user_data: UserCreateSchema,
+    user_data: UserUpdateSchema,
     update_user_use_case: UpdateUserUseCase = Depends(
         get_update_user_use_case
     ),
 ):
-    user = update_user_use_case.execute(user_id, user_data)
+    data = user_data.model_dump(exclude_unset=True)
+    user = update_user_use_case.execute(user_id, data)
+    return user
+
+
+@router.patch(
+    '/{user_id}',
+    response_model=UserResponseSchema,
+    status_code=HTTPStatus.OK,
+)
+def patch_user(
+    user_id: str,
+    user_data: UserUpdateSchema,
+    update_user_use_case: UpdateUserUseCase = Depends(
+        get_update_user_use_case
+    ),
+):
+    data = user_data.model_dump(exclude_unset=True)
+    user = update_user_use_case.execute(user_id, data)
     return user

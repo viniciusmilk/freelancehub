@@ -30,3 +30,12 @@ class UserListResponseSchema(BaseModel):
     users: list[UserResponseSchema]
 
     model_config = {'from_attributes': True}
+
+
+class UserUpdateSchema(BaseModel):
+    username: str | None = None
+    email: EmailStr | None = None
+    password: str | None = None
+    role: UserRole | None = None
+
+    model_config = {'from_attributes': True}

@@ -31,8 +31,8 @@ class UserRepository(BaseRepository[User, UserModel]):
 
         return self.mapper.to_entity(model)
 
-    def update(self, user_id: str, user_data: Entity) -> Optional[Entity]:
-        stmt = select(UserModel).where(UserModel.id == user_id)
+    def update(self, user_data: Entity) -> Optional[Entity]:
+        stmt = select(UserModel).where(UserModel.id == str(user_data.id))
         result = self.session.execute(stmt)
         model = result.scalars().one_or_none()
 
@@ -40,9 +40,9 @@ class UserRepository(BaseRepository[User, UserModel]):
             return None
 
         for key, value in user_data.__dict__.items():
-            if hasattr(model, key):
+            if hasattr(model, key) and key != 'id':
                 setattr(model, key, value)
 
-        self.session.add(model)
         self.session.commit()
+        self.session.refresh(model)
         return self.mapper.to_entity(model)
