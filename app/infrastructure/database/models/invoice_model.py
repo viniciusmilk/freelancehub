@@ -37,5 +37,12 @@ class InvoiceModel(BaseModel):
         nullable=False,
         index=True,
     )
+    
+    freelancer_id: Mapped[str] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
 
     contract = relationship("ContractModel", back_populates="invoices")
+    freelancer = relationship("UserModel", back_populates="invoices")
