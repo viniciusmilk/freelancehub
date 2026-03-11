@@ -1,6 +1,11 @@
+#User Model
 from typing import Optional
 
-from sqlalchemy import Enum, String
+from sqlalchemy import (
+    Enum,
+    String,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import (
     Mapped,
     mapped_column,
@@ -16,22 +21,25 @@ from .client_model import ClientModel
 
 class UserModel(BaseModel):
     __tablename__ = 'users'
+    __table_args__ = (
+        UniqueConstraint('email', name='uq_email'),
+        UniqueConstraint('username', name='uq_username'),
+    )
     username: Mapped[str] = mapped_column(
-        String,
-        unique=True,
+        String(50),
         nullable=False,
     )
     email: Mapped[str] = mapped_column(
-        String,
-        unique=True,
+        String(255),
         nullable=False,
+        index=True,
     )
     first_name: Mapped[str] = mapped_column(
-        String,
+        String(50),
         nullable=False,
     )
     last_name: Mapped[str] = mapped_column(
-        String,
+        String(50),
         nullable=False,
     )
     password_hash: Mapped[str] = mapped_column(

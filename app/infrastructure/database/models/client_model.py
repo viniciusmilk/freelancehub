@@ -1,5 +1,5 @@
-
-from sqlalchemy import ForeignKey, String
+#Client Model
+from sqlalchemy import ForeignKey, String, UniqueConstraint
 from sqlalchemy.orm import (
     Mapped,
     mapped_column,
@@ -11,17 +11,24 @@ from app.infrastructure.database.base_model import BaseModel
 
 class ClientModel(BaseModel):
     __tablename__ = 'clients'
-
+    __table_args__ = (
+        UniqueConstraint(
+            "owner_id",
+            "name",
+            name="uq_client_owner_name"
+        ),
+    )
+    
     name: Mapped[str] = mapped_column(
-        String,
+        String(100),
         nullable=False,
     )
     description: Mapped[str] = mapped_column(
-        String,
+        String(255),
         nullable=False,
     )
     owner_id: Mapped[str] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
         index=True,
     )
