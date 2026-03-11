@@ -1,10 +1,9 @@
-# invoice
 from datetime import datetime
 from decimal import Decimal
 from typing import Optional
 from uuid import UUID
 
-from app.domain.enums import InvoiceStatus
+from ..enums import InvoiceStatus
 
 from .base_entity import BaseEntity
 

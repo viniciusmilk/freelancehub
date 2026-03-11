@@ -1,7 +1,7 @@
 from uuid import UUID
 
-from app.domain.entities.users import User
-from app.infrastructure.database.models.user_model import UserModel
+from .....domain.entities import User
+from ..models.user_model import UserModel
 
 from .base_mapper import BaseMapper
 

@@ -13,7 +13,7 @@ from sqlalchemy.orm import (
 )
 
 from app.domain.enums import UserRole
-from app.infrastructure.database.base_model import BaseModel
+from ..base_model import BaseModel
 
 # Import para forward reference
 from .client_model import ClientModel
@@ -63,6 +63,18 @@ class UserModel(BaseModel):
 
     projects: Mapped[list["ProjectModel"]] = relationship(
         "ProjectModel",
+        back_populates="freelancer",
+        cascade="all, delete-orphan",
+    )
+    
+    contracts: Mapped[list["ContractModel"]] = relationship(
+        "ContractModel",
+        back_populates="freelancer",
+        cascade="all, delete-orphan",
+    )
+    
+    invoices: Mapped[list["InvoiceModel"]] = relationship(
+        "InvoiceModel",
         back_populates="freelancer",
         cascade="all, delete-orphan",
     )

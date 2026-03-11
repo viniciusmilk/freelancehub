@@ -1,9 +1,8 @@
-# users
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from app.domain.enums import UserRole
+from ..enums import UserRole
 
 from .base_entity import BaseEntity
 

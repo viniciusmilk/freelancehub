@@ -16,7 +16,7 @@ from sqlalchemy.orm import (
 )
 
 from app.domain.enums import InvoiceStatus
-from app.infrastructure.database.base_model import BaseModel
+from ..base_model import BaseModel
 
 
 class InvoiceModel(BaseModel):

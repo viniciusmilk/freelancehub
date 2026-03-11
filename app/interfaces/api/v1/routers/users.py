@@ -2,21 +2,21 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 
-from app.application.use_cases import (
+from .....application.use_cases import (
     CreateUserUseCase,
     DeleteUserUseCase,
     GetUsersUseCase,
     GetUserUseCase,
     UpdateUserUseCase,
 )
-from app.interfaces.dependencies import (
+from .....interfaces.dependencies import (
     get_create_user_use_case,
     get_delete_user_use_case,
     get_get_user_use_case,
     get_get_users_use_case,
     get_update_user_use_case,
 )
-from app.interfaces.schemas import (
+from .....interfaces.schemas import (
     UserCreateSchema,
     UserListResponseSchema,
     UserResponseSchema,

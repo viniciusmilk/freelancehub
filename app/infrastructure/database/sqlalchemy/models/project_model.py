@@ -13,7 +13,7 @@ from sqlalchemy.orm import (
 )
 
 from app.domain.enums import ProjectStatus
-from app.infrastructure.database.base_model import BaseModel
+from ..base_model import BaseModel
 
 
 class ProjectModel(BaseModel):

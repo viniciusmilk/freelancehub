@@ -3,7 +3,7 @@ from typing import Generic, List, Optional, Type, TypeVar
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.infrastructure.database.mappers.base_mapper import BaseMapper
+from ..mappers.base_mapper import BaseMapper
 
 Entity = TypeVar('Entity')
 Model = TypeVar('Model')
@@ -51,7 +51,7 @@ class BaseRepository(Generic[Entity, Model]):
 
         return [self.mapper.to_entity(model) for model in models]
 
-    def delete(self, id: str) -> Optional[Entity]:
+    def delete(self, id: str):
 
         stmt = select(self.model_class).where(self.model_class.id == id)
         result = self.session.execute(stmt)

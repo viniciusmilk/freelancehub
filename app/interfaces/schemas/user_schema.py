@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, EmailStr
 
-from app.domain.enums import UserRole
+from ...domain.enums import UserRole
 
 
 class UserCreateSchema(BaseModel):

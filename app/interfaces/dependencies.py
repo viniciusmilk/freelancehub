@@ -3,18 +3,16 @@ from functools import lru_cache
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from app.application.use_cases import (
+from ..application.use_cases import (
     CreateUserUseCase,
     DeleteUserUseCase,
     GetUsersUseCase,
     GetUserUseCase,
     UpdateUserUseCase,
 )
-from app.core.config import Settings
-from app.infrastructure.database.repositories.user_repository import (
-    UserRepository,
-)
-from app.infrastructure.database.session import SessionLocal
+from ..core.config import Settings
+from ..infrastructure.database.sqlalchemy.repositories import UserRepository
+from ..infrastructure.database.sqlalchemy.session import SessionLocal
 
 
 def get_db() -> Session:

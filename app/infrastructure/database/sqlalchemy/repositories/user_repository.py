@@ -4,11 +4,10 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.domain.entities.users import User
-from app.infrastructure.database.mappers.user_mapper import UserMapper
-from app.infrastructure.database.models import UserModel
-from app.infrastructure.database.repositories.base_repository import (
-    BaseRepository,
-)
+
+from ..mappers import UserMapper
+from ..models import UserModel
+from .base_repository import BaseRepository
 
 Entity = TypeVar('Entity')
 Model = TypeVar('Model')

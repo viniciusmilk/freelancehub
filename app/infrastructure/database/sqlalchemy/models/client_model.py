@@ -6,7 +6,7 @@ from sqlalchemy.orm import (
     relationship,
 )
 
-from app.infrastructure.database.base_model import BaseModel
+from ..base_model import BaseModel
 
 
 class ClientModel(BaseModel):
