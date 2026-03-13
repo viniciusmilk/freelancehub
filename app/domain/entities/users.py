@@ -3,7 +3,6 @@ from typing import Optional
 from uuid import UUID
 
 from ..enums import UserRole
-
 from .base_entity import BaseEntity
 
 
@@ -33,4 +32,4 @@ class User(BaseEntity):
 
         @property
         def full_name(self) -> str:
-            return f"{self.first_name} {self.last_name}"
+            return f'{self.first_name} {self.last_name}'

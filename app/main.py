@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.interfaces.api.v1.api import api_router
+from .interfaces.api.v1.api import api_router
 
 app = FastAPI(title='FreelanceHub API')
 

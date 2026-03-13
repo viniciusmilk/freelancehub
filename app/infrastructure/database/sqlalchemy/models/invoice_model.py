@@ -1,12 +1,12 @@
-#Invoice Model
+# Invoice Model
 from datetime import datetime
 
 from sqlalchemy import (
+    CheckConstraint,
     DateTime,
     Enum,
     Float,
     ForeignKey,
-    CheckConstraint,
     func,
 )
 from sqlalchemy.orm import (
@@ -16,6 +16,7 @@ from sqlalchemy.orm import (
 )
 
 from app.domain.enums import InvoiceStatus
+
 from ..base_model import BaseModel
 
 
@@ -27,22 +28,26 @@ class InvoiceModel(BaseModel):
 
     amount: Mapped[float] = mapped_column(Float, nullable=False)
     status: Mapped[InvoiceStatus] = mapped_column(
-        Enum(InvoiceStatus, name='invoice_status'), nullable=False,
+        Enum(InvoiceStatus, name='invoice_status'),
+        nullable=False,
     )
     due_date: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    issued_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    issued_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        server_default=func.now(),
+    )
     paid_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     contract_id: Mapped[str] = mapped_column(
-        ForeignKey("contracts.id", ondelete="CASCADE"),
-        nullable=False,
-        index=True,
-    )
-    
-    freelancer_id: Mapped[str] = mapped_column(
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey('contracts.id', ondelete='CASCADE'),
         nullable=False,
         index=True,
     )
 
-    contract = relationship("ContractModel", back_populates="invoices")
-    freelancer = relationship("UserModel", back_populates="invoices")
+    freelancer_id: Mapped[str] = mapped_column(
+        ForeignKey('users.id', ondelete='CASCADE'),
+        nullable=False,
+        index=True,
+    )
+
+    contract = relationship('ContractModel', back_populates='invoices')
+    freelancer = relationship('UserModel', back_populates='invoices')

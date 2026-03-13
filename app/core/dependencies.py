@@ -2,8 +2,8 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from ..application.use_cases import CreateUserUseCase
-from ..infrastructure.database.sqlalchemy.session import SessionLocal
 from ..infrastructure.database.sqlalchemy.repositories import UserRepository
+from ..infrastructure.database.sqlalchemy.session import SessionLocal
 
 
 def get_db_session():

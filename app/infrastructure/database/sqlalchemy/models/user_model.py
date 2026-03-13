@@ -1,4 +1,4 @@
-#User Model
+# User Model
 from typing import Optional
 
 from sqlalchemy import (
@@ -13,10 +13,14 @@ from sqlalchemy.orm import (
 )
 
 from app.domain.enums import UserRole
+
 from ..base_model import BaseModel
 
 # Import para forward reference
 from .client_model import ClientModel
+from .contract_model import ContractModel
+from .invoice_model import InvoiceModel
+from .project_model import ProjectModel
 
 
 class UserModel(BaseModel):
@@ -55,26 +59,26 @@ class UserModel(BaseModel):
         nullable=True,
     )
 
-    clients: Mapped[list["ClientModel"]] = relationship(
-        "ClientModel",
-        back_populates="owner",
-        cascade="all, delete-orphan",
+    clients: Mapped[list['ClientModel']] = relationship(
+        'ClientModel',
+        back_populates='owner',
+        cascade='all, delete-orphan',
     )
 
-    projects: Mapped[list["ProjectModel"]] = relationship(
-        "ProjectModel",
-        back_populates="freelancer",
-        cascade="all, delete-orphan",
+    projects: Mapped[list['ProjectModel']] = relationship(
+        'ProjectModel',
+        back_populates='freelancer',
+        cascade='all, delete-orphan',
     )
-    
-    contracts: Mapped[list["ContractModel"]] = relationship(
-        "ContractModel",
-        back_populates="freelancer",
-        cascade="all, delete-orphan",
+
+    contracts: Mapped[list['ContractModel']] = relationship(
+        'ContractModel',
+        back_populates='freelancer',
+        cascade='all, delete-orphan',
     )
-    
-    invoices: Mapped[list["InvoiceModel"]] = relationship(
-        "InvoiceModel",
-        back_populates="freelancer",
-        cascade="all, delete-orphan",
+
+    invoices: Mapped[list['InvoiceModel']] = relationship(
+        'InvoiceModel',
+        back_populates='freelancer',
+        cascade='all, delete-orphan',
     )

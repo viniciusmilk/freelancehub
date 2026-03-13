@@ -3,7 +3,6 @@ from typing import Optional
 from uuid import UUID
 
 from ..enums import ProjectStatus
-
 from .base_entity import BaseEntity
 
 

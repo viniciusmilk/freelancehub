@@ -3,8 +3,7 @@ from typing import Optional, TypeVar
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.domain.entities.users import User
-
+from ....domain.entities.users import User
 from ..mappers import UserMapper
 from ..models import UserModel
 from .base_repository import BaseRepository

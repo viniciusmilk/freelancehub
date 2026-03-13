@@ -2,7 +2,6 @@ from uuid import UUID
 
 from .....domain.entities import User
 from ..models.user_model import UserModel
-
 from .base_mapper import BaseMapper
 
 
@@ -33,4 +32,6 @@ class UserMapper(BaseMapper[User, UserModel]):
             password_hash=entity.password_hash,
             role=entity.role,
             oauth_provider=entity.oauth_provider,
+            created_at=entity.created_at,
+            updated_at=entity.updated_at,
         )

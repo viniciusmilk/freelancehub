@@ -1,8 +1,8 @@
 from datetime import datetime
 from uuid import uuid4
 
-from ..services.auth_service import get_password_hash
 from ...domain.entities.users import User
+from ..services.auth_service import get_password_hash
 
 
 class CreateUserUseCase:

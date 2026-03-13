@@ -4,7 +4,6 @@ from typing import Optional
 from uuid import UUID
 
 from ..enums import InvoiceStatus
-
 from .base_entity import BaseEntity
 
 

@@ -1,10 +1,10 @@
-#Contract Model
+# Contract Model
 from sqlalchemy import (
     Boolean,
+    CheckConstraint,
     Float,
     ForeignKey,
     String,
-    CheckConstraint,
 )
 from sqlalchemy.orm import (
     Mapped,
@@ -26,22 +26,20 @@ class ContractModel(BaseModel):
     signed: Mapped[bool] = mapped_column(Boolean, default=False)
 
     project_id: Mapped[str] = mapped_column(
-        ForeignKey("projects.id", ondelete="CASCADE"),
-        nullable=False,
-        index=True,
-    )
-    
-    freelancer_id: Mapped[str] = mapped_column(
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey('projects.id', ondelete='CASCADE'),
         nullable=False,
         index=True,
     )
 
-    project = relationship("ProjectModel", back_populates="contracts")
-    freelancer = relationship("UserModel", back_populates="contracts")
+    freelancer_id: Mapped[str] = mapped_column(
+        ForeignKey('users.id', ondelete='CASCADE'),
+        nullable=False,
+        index=True,
+    )
+
+    project = relationship('ProjectModel', back_populates='contracts')
+    freelancer = relationship('UserModel', back_populates='contracts')
 
     invoices = relationship(
-        "InvoiceModel",
-        back_populates="contract",
-        cascade="all, delete-orphan"
+        'InvoiceModel', back_populates='contract', cascade='all, delete-orphan'
     )

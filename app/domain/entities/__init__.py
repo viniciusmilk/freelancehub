@@ -1,8 +1,8 @@
-from .users import User
-from .project import Project
 from .client import Client
 from .contract import Contract
 from .invoice import Invoice
+from .project import Project
+from .users import User
 
 __all__ = [
     'User',
