@@ -2,14 +2,19 @@ from typing import List, Optional
 
 from sqlalchemy import select
 
-from ....domain.entities.clients import Client
+from .....domain.entities.clients import Client
+from ..mappers import ClientMapper
 from ..models import ClientModel
 from .base_repository import BaseRepository
 
 
 class ClientRepository(BaseRepository[Client, ClientModel]):
     def __init__(self, session):
-        super().__init__(session=session, model_class=ClientModel, mapper=None)
+        super().__init__(
+            session=session,
+            model_class=ClientModel,
+            mapper=ClientMapper,
+        )
 
     def get_by_owner(self, owner_id: str) -> Optional[List[Client]]:
         stmt = select(self.model_class).where(

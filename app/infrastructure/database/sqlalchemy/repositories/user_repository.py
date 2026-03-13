@@ -3,7 +3,7 @@ from typing import Optional, TypeVar
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from ....domain.entities.users import User
+from .....domain.entities.users import User
 from ..mappers import UserMapper
 from ..models import UserModel
 from .base_repository import BaseRepository
@@ -18,9 +18,9 @@ class UserRepository(BaseRepository[User, UserModel]):
             session=session, model_class=UserModel, mapper=UserMapper
         )
 
-    def get_by_email(self, email: str):
+    def get_by_email(self, email: str) -> Optional[Entity]:
 
-        stmt = select(UserModel).where(UserModel.email == email)
+        stmt = select(self.model_class).where(self.model_class.email == email)
         result = self.session.execute(stmt)
         model = result.scalars().one_or_none()
 
@@ -30,7 +30,9 @@ class UserRepository(BaseRepository[User, UserModel]):
         return self.mapper.to_entity(model)
 
     def update(self, user_data: Entity) -> Optional[Entity]:
-        stmt = select(UserModel).where(UserModel.id == str(user_data.id))
+        stmt = select(self.model_class).where(
+            self.model_class.id == str(user_data.id)
+        )
         result = self.session.execute(stmt)
         model = result.scalars().one_or_none()
 

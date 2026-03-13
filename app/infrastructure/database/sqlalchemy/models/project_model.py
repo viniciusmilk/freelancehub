@@ -5,6 +5,7 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     String,
+    UniqueConstraint,
 )
 from sqlalchemy.orm import (
     Mapped,
@@ -20,11 +21,21 @@ from ..base_model import BaseModel
 class ProjectModel(BaseModel):
     __tablename__ = 'projects'
     __table_args__ = (
-        CheckConstraint('budget >= 0', name='check_budget_non_negative'),
+        CheckConstraint(
+            'budget >= 0',
+            name='check_budget_non_negative',
+        ),
+        UniqueConstraint('title', name='uq_title'),
     )
 
-    title: Mapped[str] = mapped_column(String(255), nullable=False)
-    description: Mapped[str] = mapped_column(String, nullable=False)
+    title: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+    )
+    description: Mapped[str] = mapped_column(
+        String,
+        nullable=False,
+    )
     status: Mapped[ProjectStatus] = mapped_column(
         Enum(ProjectStatus, name='project_status'),
         nullable=False,
