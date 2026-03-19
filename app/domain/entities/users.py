@@ -19,6 +19,12 @@ class User(BaseEntity):
         created_at: datetime,
         updated_at: Optional[datetime] = None,
         oauth_provider: Optional[str] = None,
+        phone: Optional[str] = None,
+        bio: Optional[str] = None,
+        skills: Optional[str] = None,
+        hourly_rate: Optional[float] = None,
+        is_available: bool = True,
+        profile_image_url: Optional[str] = None,
     ):
         super().__init__(id, created_at, updated_at)
 
@@ -29,6 +35,12 @@ class User(BaseEntity):
         self.password_hash = password_hash
         self.role = role
         self.oauth_provider = oauth_provider
+        self.phone = phone
+        self.bio = bio
+        self.skills = skills
+        self.hourly_rate = hourly_rate
+        self.is_available = is_available
+        self.profile_image_url = profile_image_url
 
         @property
         def full_name(self) -> str:

@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from sqlalchemy import select
 
-from .....domain.entities.clients import Client
+from .....domain.entities import Client
 from ..mappers import ClientMapper
 from ..models import ClientModel
 from .base_repository import BaseRepository

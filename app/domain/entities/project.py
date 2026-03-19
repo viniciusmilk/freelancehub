@@ -1,4 +1,5 @@
 from datetime import datetime
+from decimal import Decimal
 from typing import Optional
 from uuid import UUID
 
@@ -13,9 +14,13 @@ class Project(BaseEntity):
         title: str,
         description: str,
         status: ProjectStatus,
-        budget: float,
+        budget: Decimal,
         client_id: UUID,
-        freelancer_id: UUID,
+        skills_required: Optional[str],
+        is_remote: bool,
+        start_date: Optional[datetime],
+        end_date: Optional[datetime],
+        location: Optional[str],
         created_at: datetime,
         updated_at: Optional[datetime] = None,
     ):
@@ -25,4 +30,8 @@ class Project(BaseEntity):
         self.status = status
         self.budget = budget
         self.client_id = client_id
-        self.freelancer_id = freelancer_id
+        self.skills_required = skills_required
+        self.is_remote = is_remote
+        self.start_date = start_date
+        self.end_date = end_date
+        self.location = location

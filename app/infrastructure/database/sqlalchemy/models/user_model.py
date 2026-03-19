@@ -15,12 +15,7 @@ from sqlalchemy.orm import (
 from app.domain.enums import UserRole
 
 from ..base_model import BaseModel
-
-# Import para forward reference
 from .client_model import ClientModel
-from .contract_model import ContractModel
-from .invoice_model import InvoiceModel
-from .project_model import ProjectModel
 
 
 class UserModel(BaseModel):
@@ -58,27 +53,71 @@ class UserModel(BaseModel):
         String,
         nullable=True,
     )
+    phone: Mapped[Optional[str]] = mapped_column(
+        String(20),
+        nullable=True,
+    )
+    bio: Mapped[Optional[str]] = mapped_column(
+        String(1000),
+        nullable=True,
+    )
+    skills: Mapped[Optional[str]] = mapped_column(
+        String(500),
+        nullable=True,
+    )
+    hourly_rate: Mapped[Optional[float]] = mapped_column(
+        nullable=True,
+    )
+    is_available: Mapped[bool] = mapped_column(
+        nullable=False,
+        default=True,
+    )
+    profile_image_url: Mapped[Optional[str]] = mapped_column(
+        String(500),
+        nullable=True,
+    )
 
+    # Relationships
     clients: Mapped[list['ClientModel']] = relationship(
         'ClientModel',
         back_populates='owner',
         cascade='all, delete-orphan',
     )
 
-    projects: Mapped[list['ProjectModel']] = relationship(
-        'ProjectModel',
+    proposals = relationship(
+        'ProposalModel',
         back_populates='freelancer',
         cascade='all, delete-orphan',
     )
 
-    contracts: Mapped[list['ContractModel']] = relationship(
+    contracts = relationship(
         'ContractModel',
         back_populates='freelancer',
         cascade='all, delete-orphan',
     )
 
-    invoices: Mapped[list['InvoiceModel']] = relationship(
-        'InvoiceModel',
+    time_entries = relationship(
+        'TimeEntryModel',
         back_populates='freelancer',
+        cascade='all, delete-orphan',
+    )
+
+    reviews_given = relationship(
+        'ReviewModel',
+        foreign_keys='ReviewModel.reviewer_id',
+        back_populates='reviewer',
+        cascade='all, delete-orphan',
+    )
+
+    reviews_received = relationship(
+        'ReviewModel',
+        foreign_keys='ReviewModel.reviewee_id',
+        back_populates='reviewee',
+        cascade='all, delete-orphan',
+    )
+
+    notifications = relationship(
+        'NotificationModel',
+        back_populates='user',
         cascade='all, delete-orphan',
     )

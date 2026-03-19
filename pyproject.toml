@@ -37,6 +37,7 @@ preview = true
 select = ['I', 'F', 'E', 'W', 'PL', 'PT']
 # "Magic Numbers" (200) nos testes
 # ignore = ["PLR2004"]
+ignore = ["PLR0913", "PLR0917"]
 [tool.ruff.lint.pylint]
 max-args = 10   
 

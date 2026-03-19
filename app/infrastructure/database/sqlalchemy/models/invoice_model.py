@@ -1,13 +1,15 @@
 # Invoice Model
 from datetime import datetime
+from decimal import Decimal
 
 from sqlalchemy import (
     CheckConstraint,
     DateTime,
     Enum,
-    Float,
     ForeignKey,
-    func,
+    Numeric,
+    String,
+    Text,
 )
 from sqlalchemy.orm import (
     Mapped,
@@ -26,28 +28,51 @@ class InvoiceModel(BaseModel):
         CheckConstraint('amount >= 0', name='check_amount_non_negative'),
     )
 
-    amount: Mapped[float] = mapped_column(Float, nullable=False)
+    invoice_number: Mapped[str] = mapped_column(
+        String(50), nullable=False, unique=True
+    )
+    amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
+    tax_amount: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2), nullable=False, default=0
+    )
+    total_amount: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2), nullable=False
+    )
     status: Mapped[InvoiceStatus] = mapped_column(
         Enum(InvoiceStatus, name='invoice_status'),
         nullable=False,
+        default=InvoiceStatus.draft,
     )
     due_date: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    issued_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        server_default=func.now(),
-    )
+    issued_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
     paid_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+    payment_method: Mapped[str | None] = mapped_column(
+        String(50),
+        nullable=True,
+    )
+    payment_reference: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
+    )
+
     contract_id: Mapped[str] = mapped_column(
         ForeignKey('contracts.id', ondelete='CASCADE'),
         nullable=False,
         index=True,
     )
-
-    freelancer_id: Mapped[str] = mapped_column(
-        ForeignKey('users.id', ondelete='CASCADE'),
-        nullable=False,
+    milestone_id: Mapped[str | None] = mapped_column(
+        ForeignKey('milestones.id', ondelete='SET NULL'),
+        nullable=True,
         index=True,
     )
 
+    # Relationships
     contract = relationship('ContractModel', back_populates='invoices')
-    freelancer = relationship('UserModel', back_populates='invoices')
+    milestone = relationship('MilestoneModel', back_populates='invoices')
+
+    notifications = relationship(
+        'NotificationModel',
+        back_populates='invoice',
+        cascade='all, delete-orphan',
+    )

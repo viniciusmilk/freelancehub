@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from .....domain.entities.client import Client
+from .....domain.entities import Client
 from ..models import ClientModel
 from .base_mapper import BaseMapper
 
