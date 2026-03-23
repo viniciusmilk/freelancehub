@@ -52,14 +52,14 @@ class MilestoneModel(BaseModel):
     )
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
 
-    project_id: Mapped[str] = mapped_column(
-        ForeignKey('projects.id', ondelete='CASCADE'),
+    contract_id: Mapped[str] = mapped_column(
+        ForeignKey('contracts.id', ondelete='CASCADE'),
         nullable=False,
         index=True,
     )
 
     # Relationships
-    project = relationship('ProjectModel', back_populates='milestones')
+    contract = relationship('ContractModel', back_populates='milestone')
 
     time_entries = relationship(
         'TimeEntryModel',

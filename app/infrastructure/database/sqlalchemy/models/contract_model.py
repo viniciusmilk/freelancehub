@@ -83,3 +83,21 @@ class ContractModel(BaseModel):
         back_populates='contract',
         cascade='all, delete-orphan',
     )
+
+    milestones = relationship(
+        'MilestoneModel',
+        back_populates='contract',
+        cascade='all, delete-orphan',
+    )
+
+    time_entries = relationship(
+        'TimeEntryModel',
+        back_populates='contract',
+        cascade='all, delete-orphan',
+    )
+
+    messages = relationship(
+        'MessageModel',
+        back_populates='contract',
+        cascade='all, delete-orphan',
+    )

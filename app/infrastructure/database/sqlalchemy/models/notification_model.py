@@ -33,7 +33,9 @@ class NotificationModel(BaseModel):
     scheduled_for: Mapped[datetime | None] = mapped_column(
         DateTime, nullable=True
     )
-    notification_metadata: Mapped[str | None] = mapped_column(Text, nullable=True)
+    notification_metadata: Mapped[str | None] = mapped_column(
+        Text, nullable=True
+    )
 
     user_id: Mapped[str] = mapped_column(
         ForeignKey('users.id', ondelete='CASCADE'),

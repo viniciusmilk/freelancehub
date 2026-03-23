@@ -93,3 +93,9 @@ class ProjectModel(BaseModel):
         back_populates='project',
         cascade='all, delete-orphan',
     )
+
+    messages = relationship(
+        'MessageModel',
+        back_populates='project',
+        cascade='all, delete-orphan',
+    )

@@ -121,3 +121,17 @@ class UserModel(BaseModel):
         back_populates='user',
         cascade='all, delete-orphan',
     )
+
+    sent_messages = relationship(
+        'MessageModel',
+        foreign_keys='MessageModel.sender_id',
+        back_populates='sender',
+        cascade='all, delete-orphan',
+    )
+
+    received_messages = relationship(
+        'MessageModel',
+        foreign_keys='MessageModel.receiver_id',
+        back_populates='receiver',
+        cascade='all, delete-orphan',
+    )

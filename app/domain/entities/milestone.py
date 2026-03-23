@@ -16,7 +16,7 @@ class Milestone(BaseEntity):
         amount: Decimal,
         status: MilestoneStatus,
         due_date: datetime,
-        project_id: UUID,
+        contract_id: UUID,
         created_at: datetime,
         progress_percentage: float = 0.0,
         completed_at: Optional[datetime] = None,
@@ -25,7 +25,7 @@ class Milestone(BaseEntity):
         updated_at: Optional[datetime] = None,
     ):
         super().__init__(id, created_at, updated_at)
-        self.project_id = project_id
+        self.contract_id = contract_id
         self.title = title
         self.description = description
         self.amount = amount

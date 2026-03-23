@@ -35,4 +35,4 @@ class Notification(BaseEntity):
         self.is_read = is_read
         self.read_at = read_at
         self.scheduled_for = scheduled_for
-        self.metadata = metadata
+        self.notification_metadata = metadata

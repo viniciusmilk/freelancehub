@@ -15,7 +15,7 @@ class TimeEntry(BaseEntity):
         date: datetime,
         status: TimeEntryStatus,
         freelancer_id: UUID,
-        project_id: UUID,
+        contract_id: UUID,
         created_at: datetime,
         milestone_id: Optional[UUID] = None,
         submitted_at: Optional[datetime] = None,
@@ -25,7 +25,7 @@ class TimeEntry(BaseEntity):
     ):
         super().__init__(id, created_at, updated_at)
         self.freelancer_id = freelancer_id
-        self.project_id = project_id
+        self.contract_id = contract_id
         self.milestone_id = milestone_id
         self.hours = hours
         self.description = description

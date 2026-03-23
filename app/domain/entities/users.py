@@ -42,6 +42,6 @@ class User(BaseEntity):
         self.is_available = is_available
         self.profile_image_url = profile_image_url
 
-        @property
-        def full_name(self) -> str:
-            return f'{self.first_name} {self.last_name}'
+    @property
+    def full_name(self) -> str:
+        return f'{self.first_name} {self.last_name}'

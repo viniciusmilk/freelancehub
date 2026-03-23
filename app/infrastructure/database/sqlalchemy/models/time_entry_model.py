@@ -47,8 +47,8 @@ class TimeEntryModel(BaseModel):
         nullable=False,
         index=True,
     )
-    project_id: Mapped[str] = mapped_column(
-        ForeignKey('projects.id', ondelete='CASCADE'),
+    contract_id: Mapped[str] = mapped_column(
+        ForeignKey('contracts.id', ondelete='CASCADE'),
         nullable=False,
         index=True,
     )
@@ -60,5 +60,5 @@ class TimeEntryModel(BaseModel):
 
     # Relationships
     freelancer = relationship('UserModel', back_populates='time_entries')
-    project = relationship('ProjectModel', back_populates='time_entries')
+    contract = relationship('ContractModel', back_populates='time_entries')
     milestone = relationship('MilestoneModel', back_populates='time_entries')

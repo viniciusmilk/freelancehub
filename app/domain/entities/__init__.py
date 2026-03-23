@@ -1,6 +1,7 @@
 from .client import Client
 from .contract import Contract
 from .invoice import Invoice
+from .message import Message
 from .milestone import Milestone
 from .notification import Notification
 from .project import Project
@@ -20,4 +21,5 @@ __all__ = [
     'Invoice',
     'Review',
     'Notification',
+    'Message',
 ]

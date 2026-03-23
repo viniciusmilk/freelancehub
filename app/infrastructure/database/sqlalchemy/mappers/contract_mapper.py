@@ -12,7 +12,7 @@ class ContractMapper(BaseMapper[Contract, ContractModel]):
             id=UUID(model.id),
             freelancer_id=UUID(model.freelancer_id),
             project_id=UUID(model.project_id),
-            proposal_id=UUID(model.proposal_id),    
+            proposal_id=UUID(model.proposal_id),
             terms=model.terms,
             value=model.value,
             status=model.status,
