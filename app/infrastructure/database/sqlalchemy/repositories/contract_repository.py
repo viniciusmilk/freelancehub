@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from .....domain.entities import Contract
 from ..mappers import ContractMapper
-from ..models import ContractModel, ProjectModel
+from ..models import ContractModel, InvoiceModel, ProjectModel
 from .base_repository import BaseRepository
 
 
@@ -60,10 +60,10 @@ class ContractRepository(BaseRepository[Contract, ContractModel]):
         return [self.mapper.to_entity(model) for model in models]
 
     def get_by_client(self, client_id: str) -> List[Contract]:
-        stmt = select(self.model_class).join(
-            ProjectModel
-        ).where(
-            ProjectModel.client_id == client_id
+        stmt = (
+            select(self.model_class)
+            .join(self.model_class.project)
+            .where(ProjectModel.client_id == client_id)
         )
         result = self.session.execute(stmt)
 
@@ -90,5 +90,22 @@ class ContractRepository(BaseRepository[Contract, ContractModel]):
 
         return self.mapper.to_entity(model)
 
-    def get_with_invoices(self, id: str) -> Optional[List[Contract]]:
-        pass
+    def get_with_invoice(self, invoice_id: str) -> Optional[Contract]:
+        stmt = (
+            select(self.model_class)
+            .join(
+                InvoiceModel,
+                InvoiceModel.contract_id == self.model_class.id,
+            )
+            .where(
+                InvoiceModel.id == invoice_id,
+            )
+        )
+        result = self.session.execute(stmt)
+
+        model = result.scalars().first()
+
+        if not model:
+            return None
+
+        return self.mapper.to_entity(model)

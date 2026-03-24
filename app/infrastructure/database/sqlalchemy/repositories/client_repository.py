@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from .....domain.entities import Client
 from ..mappers import ClientMapper
@@ -9,7 +10,7 @@ from .base_repository import BaseRepository
 
 
 class ClientRepository(BaseRepository[Client, ClientModel]):
-    def __init__(self, session):
+    def __init__(self, session: Session):
         super().__init__(
             session=session,
             model_class=ClientModel,
